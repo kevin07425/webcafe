@@ -10,7 +10,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("tw-elements/dist/plugin.cjs"), require('preline/plugin'),],
+  plugins: [
+    require("tw-elements/dist/plugin.cjs"), 
+    require('preline/plugin'),],
   darkMode: "class"
 }
 

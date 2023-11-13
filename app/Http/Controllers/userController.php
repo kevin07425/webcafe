@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 class userController extends Controller
 {
     public function index(){
-        return view('dashboard.index');
+        return view('pages.home');
     }
     public function login(){
-        return view('dashboard.loginPages');
+        return view('pages.loginPages');
+    }
+    public function dataTable(){
+        return view('pages.dataTables');
     }
 }

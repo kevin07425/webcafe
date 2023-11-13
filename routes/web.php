@@ -16,3 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[userController::class, 'index']);
 Route::get('/login_admin',[userController::class, 'login']);
+Route::get('/table',[userController::class, 'dataTable']);
+
+Route::fallback(function(){
+    return view('pages.404');
+});
