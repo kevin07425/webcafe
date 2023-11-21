@@ -43,23 +43,52 @@
                 class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
                 <a class="font-medium text-blue-600 md:py-6 dark:text-blue-500" href="{{ url('/') }}"
                     aria-current="page">Dashboard</a>
-                <a class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
-                    href="{{ url('table') }}">Data Table</a>
+                @if (Route::has('login'))
+                    @auth
+                        <a class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            href="{{ url('table') }}">Data Table</a>
+                    @else
+                        <div></div>
+                    @endauth
+                @endif
+
                 <a class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
                     href="#">Work</a>
                 <a class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
                     href="#">Blog</a>
 
-                <a class="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500"
-                    href="{{ url('login_admin') }}">
-                    <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                    Log in
-                </a>
+
+                @auth
+                    <div
+                        class="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500">
+                        <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                        </svg>
+
+                        <span>{{ Auth::user()->name }}</span>
+                    </div>
+                @endauth
+
+                @if (Route::has('login'))
+                    @auth
+                        <a class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            href="{{ route('logout') }}"
+                            onclick="event.preventDefault();document.getElementById('frmlogout').submit();">
+                            Logout
+                        </a>
+                        <form id="frmlogout" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        </form>
+                    @else
+                        <a class="font-medium text-gray-500 hover:text-gray-400 md:py-6 dark:text-gray-400 dark:hover:text-gray-500"
+                            href="{{ route('login') }}">
+                            Login
+                        </a>
+                    @endauth
+                @endif
             </div>
         </div>
     </nav>

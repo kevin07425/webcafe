@@ -21,3 +21,13 @@ Route::get('/table',[userController::class, 'dataTable']);
 Route::fallback(function(){
     return view('pages.404');
 });
+
+Auth::routes();
+
+Route::middleware('auth')->group(function(){
+    Route::get('/my-account', [UserController::class,'index'])->name('user.index');
+});
+
+Route::middleware('auth', 'auth.admin')->group(function(){
+    Route::get('/admin', [AdminController::class,'index'])->name('admin.index');
+});
